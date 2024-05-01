@@ -1,0 +1,90 @@
+body {
+
+  background-color: #0C0C0C;
+  padding: 0px;
+  margin: 0px;
+
+}
+
+.content_wrapper {
+
+  width: clalc(100vw - 40px);
+  height: calc(100vh - 40px);
+  padding: 20px;
+  display: flex;
+  gap: 10px;
+
+  .input_section {
+
+    width: 400px;
+    height: 100%;
+    background-color: red;
+
+  }
+
+  .graph_section {
+
+    flex-grow: 1;
+    height: 100%;
+    background-color: blue;
+
+  }
+
+  .options_section {
+
+    width: 50px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+  }
+
+}
+
+.btn {
+
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border: 3px solid #6F6F6F;
+  border-radius: 10px;
+
+  i {
+
+    font-size: 24px;
+    color: #6F6F6F;
+
+  }
+
+}
+
+.btn:hover {
+
+  border-color: #ACACAC;
+
+  i {
+
+    color: #ACACAC;
+
+  }
+
+}
+
+.btn.active {
+
+  border-color: #ffffff;
+
+  i {
+
+    color: #ffffff;
+
+  }
+
+}
+
+.btn:last-of-type {
+
+  margin-top: auto;
+
+}
