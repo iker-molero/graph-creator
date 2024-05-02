@@ -19,10 +19,128 @@
   <div class="content_wrapper" ng-controller="graph_creator_controller">
 
     <!-- Input Section -->
-    <div class="input_section"></div>
+    <div class="input_section">
+
+      <!-- Input type selector -->
+      <div class="input_selector">
+
+        <button class="input_btn" ng-class="{ 'active': selected_input_type == '0' }" ng-click="change_input_type(0)">
+          <p>Graph</p>
+        </button>
+
+        <button class="input_btn" ng-class="{ 'active': selected_input_type == '1' }" ng-click="change_input_type(1)">
+          <p>Datasets</p>
+        </button>
+
+      </div>
+
+      <!-- Inputs for line graphs -->
+      <div class="line_graph_inputs" ng-show="selected_graph_type == 0">
+
+        <!-- Graph values -->
+        <div class="input_wrapper" ng-show="selected_input_type == 0">
+
+          <div class="color_input">
+
+            <p>Background Color:</p>
+            <button class="toggle"
+              ng-click="line_graph_values.show_background = !line_graph_values.show_background; reload_line_graph()">
+              <div ng-show="line_graph_values.show_background"></div>
+            </button>
+            <input type="color" ng-model="line_graph_values.background_color" ng-change="reload_line_graph()">
+
+          </div>
+
+          <div class="color_input">
+
+            <p>Border Color:</p>
+            <input type="color" ng-model="line_graph_values.border_color" ng-change="reload_line_graph()">
+
+          </div>
+
+          <div class="color_input">
+
+            <p>Grid Color:</p>
+            <input type="color" ng-model="line_graph_values.grid_color" ng-change="reload_line_graph()">
+
+          </div>
+
+          <div class="labels_input">
+
+            <p>Labels:</p>
+            <div class="labels_wrapper">
+
+              <input type="text" ng-repeat="label in line_graph_values.labels track by $index"
+                ng-model="line_graph_values.labels[$index]" ng-change="reload_line_graph()">
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Datasets values -->
+        <div class="datasets_container">
+
+          <div class="dataset_wrapper" ng-show="selected_input_type == 1" ng-repeat="dataset in line_graph_datasets">
+
+            <div class="labels_input">
+
+              <p>Name:</p>
+
+              <div class="labels_wrapper">
+
+                <input type="text" ng-model="dataset.name" ng-change="reload_line_graph()">
+
+              </div>
+
+            </div>
+
+            <div class="toggle_input">
+
+              <p>Active:</p>
+
+              <button class="toggle" ng-click="dataset.active = !dataset.active; reload_line_graph()">
+                <div ng-show="dataset.active"></div>
+              </button>
+
+            </div>
+
+            <div class="color_input">
+
+              <p>Color:</p>
+              <input type="color" ng-model="dataset.color" ng-change="reload_line_graph()">
+
+            </div>
+
+            <div class="labels_input">
+
+              <p>Values:</p>
+              <div class="labels_wrapper">
+
+                <input type="text" ng-repeat="value in dataset.values track by $index" ng-model="dataset.values[$index]"
+                  ng-change="reload_line_graph()">
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
 
     <!-- Graph Section -->
-    <div class="graph_section"></div>
+    <div class="graph_section">
+
+      <canvas id="line_graph" width="900" height="450" ng-show="selected_graph_type == 0"></canvas>
+      <canvas id="bar_graph" width="900" height="450" ng-show="selected_graph_type == 1"></canvas>
+      <canvas id="pie_graph" width="450" height="450" ng-show="selected_graph_type == 2"></canvas>
+
+    </div>
 
     <!-- Options Sections -->
     <div class="options_section">
@@ -57,5 +175,9 @@
 <!-- JS References -->
 <script src="js/app.js"></script>
 <script src="js/controllers/graph_creator_controller.js"></script>
+
+<!-- JS Services -->
+<script src="js/services/line_graph_service.js"></script>
+<script src="js/services/color_service.js"></script>
 
 </html>

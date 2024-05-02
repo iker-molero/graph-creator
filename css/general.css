@@ -1,14 +1,55 @@
+@font-face {
+
+  font-family: Inter;
+  src: url(../fonts/Inter.ttf);
+
+}
+
 body {
 
   background-color: #0C0C0C;
+  font-family: Inter;
   padding: 0px;
   margin: 0px;
 
 }
 
+p {
+
+  margin: 0px;
+
+}
+
+::-webkit-scrollbar {
+
+  width: 5px;
+  background-color: #0C0C0C;
+
+}
+
+::-webkit-scrollbar-track {
+
+  width: 20px;
+
+}
+
+::-webkit-scrollbar-thumb {
+
+
+  background-color: #6F6F6F;
+
+}
+
+.line_graph_inputs {
+
+  max-height: calc(100% - 50px);
+  display: flex;
+
+}
+
 .content_wrapper {
 
-  width: clalc(100vw - 40px);
+  width: calc(100vw - 40px);
   height: calc(100vh - 40px);
   padding: 20px;
   display: flex;
@@ -17,8 +58,167 @@ body {
   .input_section {
 
     width: 400px;
-    height: 100%;
-    background-color: red;
+    height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+
+    .input_selector {
+
+      width: 100%;
+      height: 50px;
+      top: 0px;
+      display: flex;
+      gap: 10px;
+
+    }
+
+    .input_wrapper {
+
+      width: calc(100% - 40px);
+      flex-grow: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .color_input {
+
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #ffffff;
+
+        input {
+
+          margin-left: auto;
+
+        }
+
+      }
+
+      .labels_input {
+
+        width: 100%;
+        flex-grow: 1;
+        display: flex;
+        color: #ffffff;
+
+        p {
+
+          width: 50%;
+          flex-grow: 1;
+
+        }
+
+        .labels_wrapper {
+
+          width: 50%;
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          input {
+
+            height: 20px;
+            background-color: transparent;
+            border: 0px;
+            border-bottom: 2px solid #ffffff;
+            color: #ffffff;
+            text-align: right;
+
+          }
+
+        }
+
+      }
+
+    }
+
+    .datasets_container {
+
+      flex-grow: 1;
+      overflow: hidden;
+      overflow-y: scroll;
+
+      .dataset_wrapper {
+
+        width: calc(100% - 40px);
+        max-height: 550px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .color_input {
+
+          width: 100%;
+          height: fit-content;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          color: #ffffff;
+
+          input {
+
+            margin-left: auto;
+
+          }
+
+        }
+
+        .labels_input {
+
+          width: 100%;
+          flex-grow: 1;
+          display: flex;
+          color: #ffffff;
+
+          p {
+
+            width: 50%;
+            flex-grow: 1;
+
+          }
+
+          .labels_wrapper {
+
+            width: 50%;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            input {
+
+              height: 20px;
+              background-color: transparent;
+              border: 0px;
+              border-bottom: 2px solid #ffffff;
+              color: #ffffff;
+              text-align: right;
+
+            }
+
+          }
+
+        }
+
+        .toggle_input {
+
+          width: 100%;
+          flex-grow: 1;
+          display: flex;
+          color: #ffffff;
+          justify-content: space-between;
+
+        }
+
+      }
+
+    }
 
   }
 
@@ -26,7 +226,24 @@ body {
 
     flex-grow: 1;
     height: 100%;
-    background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    #line_graph,
+    #bar_graph {
+
+      width: 900px;
+      height: 450px;
+
+    }
+
+    #pie_graph {
+
+      width: 450px;
+      height: 450px;
+
+    }
 
   }
 
@@ -49,6 +266,7 @@ body {
   background-color: transparent;
   border: 3px solid #6F6F6F;
   border-radius: 10px;
+  cursor: pointer;
 
   i {
 
@@ -86,5 +304,69 @@ body {
 .btn:last-of-type {
 
   margin-top: auto;
+
+}
+
+.input_btn {
+
+  width: calc(50% - 5px);
+  height: 50px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 3px solid #6F6F6F;
+  cursor: pointer;
+
+  p {
+
+    font-size: 20px;
+    color: #6F6F6F;
+
+  }
+
+}
+
+.input_btn:hover {
+
+  border-bottom-color: #ACACAC;
+
+  p {
+
+    color: #ACACAC;
+
+  }
+
+}
+
+.input_btn.active {
+
+  border-bottom-color: #ffffff;
+
+  p {
+
+    color: #ffffff;
+
+  }
+
+}
+
+.toggle {
+
+  width: 20px;
+  height: 20px;
+  padding: 0px;
+  background-color: transparent;
+  border: 2px solid #ffffff;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  div {
+
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff;
+
+  }
 
 }
