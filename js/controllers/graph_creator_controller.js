@@ -26,7 +26,7 @@ graph_creator_controller = function($scope) {
     background_color: "#0C0C0C",
     border_color: "#FFFFFF",
     grid_color: "#6F6F6F",
-    labels: ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"]
+    labels: ["2019 Q3", "2019 Q4", "2020 Q1", "2020 Q2", "2020 Q3", "2020 Q4", "2021 Q1", "2021 Q2", "2021 Q3", "2021 Q4"]
 
   };
 
@@ -35,29 +35,89 @@ graph_creator_controller = function($scope) {
   // - Active - (Bool)
   // - Name - (String)
   // - Color - (Hex value)
-  // - values - [Ints]
+  // - Values - [Ints]
   $scope.line_graph_datasets = [
 
     {
       active: true,
-      name: "Dataset 1",
-      color: "#ff0000",
-      values: new Array(10).fill().map(() => Math.floor(Math.random() * 100))
+      name: "Javascript",
+      color: "#F7DF1E",
+      values: [142693, 116636, 113844, 130010, 99493, 94999, 86877, 73535, 64938, 50087]
     },
 
     {
       active: true,
-      name: "Dataset 2",
-      color: "#0000ff",
-      values: new Array(10).fill().map(() => Math.floor(Math.random() * 100))
+      name: "Python",
+      color: "#3776AB",
+      values: [108596, 107953, 113350, 130779, 111855, 101529, 99287, 85788, 80105, 62837]
     },
 
     {
       active: true,
-      name: "Dataset 3",
-      color: "#00ff00",
-      values: new Array(10).fill().map(() => Math.floor(Math.random() * 100))
+      name: "Rust",
+      color: "#FF642D",
+      values: [4745, 5406, 5058, 5857, 4725, 4512, 4182, 3688, 3063, 2653]
     }
+
+  ];
+
+  // Bar graph values:
+  // Background color - (Hex value)
+  // Border color - (Hex value)
+  // Grid color - (Hex value)
+  // Labels - [Strings]
+  $scope.bar_graph_values = {
+
+    show_background: true,
+    background_color: "#0C0C0C",
+    border_color: "#FFFFFF",
+    grid_color: "#6F6F6F",
+    labels: ["2017", "2018", "2019", "2020", "2021"]
+
+  };
+
+  // Bar datasets values:
+  // Dataset item:
+  // - Active - (Bool)
+  // - Name - (String)
+  // - Color - (Hex value)
+  // - Values - [Ints]
+  $scope.bar_graph_datasets = [
+
+    {
+      active: true,
+      name: "Javascript",
+      color: "#F7DF1E",
+      values: [1477140, 662691, 787866, 817650, 613030]
+    },
+
+    {
+      active: true,
+      name: "Python",
+      color: "#3776AB",
+      values: [970465, 740172, 770913, 809805, 676289]
+    },
+
+    {
+      active: true,
+      name: "C",
+      color: "#A8B9CC",
+      values: [153689, 122630, 131482, 133868, 114026]
+    },
+
+    {
+      active: true,
+      name: "Kotlin",
+      color: "#7F52FF",
+      values: [40442, 35346, 41234, 44630, 38665]
+    },
+
+    {
+      active: true,
+      name: "Rust",
+      color: "#FF642D",
+      values: [46766, 30269, 35479, 43201, 28015]
+    },
 
   ];
 
@@ -89,11 +149,21 @@ graph_creator_controller = function($scope) {
 
   };
 
+  $scope.reload_bar_graph = function() {
+
+    bar_graph_service.draw_canvas($scope.bar_graph_values, $scope.bar_graph_datasets);
+
+  };
+
   // ====================================
   //                 On-load
   // ====================================
+
   line_graph_service.create_canvas('line_graph');
   line_graph_service.draw_canvas($scope.line_graph_values, $scope.line_graph_datasets);
+
+  bar_graph_service.create_canvas('bar_graph');
+  bar_graph_service.draw_canvas($scope.bar_graph_values, $scope.bar_graph_datasets);
 
 };
 

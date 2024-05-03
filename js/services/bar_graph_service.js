@@ -1,13 +1,13 @@
-const line_graph_service = { canvas: undefined, ctx: undefined };
+const bar_graph_service = { canvas: undefined, ctx: undefined };
 
-line_graph_service.create_canvas = function(id) {
+bar_graph_service.create_canvas = function(id) {
 
   this.canvas = document.getElementById(id);
   this.ctx = this.canvas.getContext('2d');
 
 };
 
-line_graph_service.draw_canvas = function(graph_values, datasets) {
+bar_graph_service.draw_canvas = function(graph_values, datasets) {
 
   // Filter all the empty labels
   const labels = graph_values.labels.filter((label) => label != "");
@@ -39,25 +39,22 @@ line_graph_service.draw_canvas = function(graph_values, datasets) {
   // Create the X labels and X grid
   // Get the points of each label
   const x_length = padded_right - padded_left;
-  const x_label_gap = labels.length > 1 ? x_length / (labels.length - 1) : 0;
+  const x_label_gap = labels.length > 1 ? x_length / labels.length : 0;
 
-  ctx.font = '14px Arial';
+  ctx.font = "14px Arial";
   ctx.fillStyle = graph_values.border_color;
 
-  // Iterate through each label, calculate the position and render the text
+  // Iterate though each label, caculate the position and render the text
   for (label_index in labels) {
 
     const label = labels[label_index];
     const text_width = ctx.measureText(label).width;
     const text_x_position = (padded_left - (text_width / 2)) + (x_label_gap * label_index);
     const text_y_position = padded_bottom + 20;
-    ctx.fillText(label, text_x_position, text_y_position);
+    ctx.fillText(label, text_x_position + (x_label_gap / 2), text_y_position);
 
-    // If this is not the first label, draw the grid line for it
-    if (label_index == 0) continue;
-
-    // Calculate the grid starting position and draw the line
-    const grid_line_x_position = text_x_position + (text_width / 2);
+    // Draw the grid line
+    const grid_line_x_position = text_x_position + x_label_gap + (text_width / 2);
 
     ctx.beginPath();
     ctx.moveTo(grid_line_x_position, padded_bottom);
@@ -66,7 +63,7 @@ line_graph_service.draw_canvas = function(graph_values, datasets) {
     ctx.strokeStyle = graph_values.grid_color;
     ctx.stroke();
 
-  }
+  };
 
   // Create the Y labels and Y grid
   // Get the max value of all the datasets
@@ -103,32 +100,36 @@ line_graph_service.draw_canvas = function(graph_values, datasets) {
 
   };
 
-  // Draw the lines
-  // Iterate through each value
-  active_datasets.forEach(dataset => {
+  // Draw the bars
+  // Iterate through each label
+  const section_length = x_length / labels.length;
 
-    ctx.beginPath();
-    for (value_index in dataset.values) {
+  for (label_index in labels) {
 
-      if (value_index > labels.length - 1) continue;
-      const value = dataset.values[value_index];
+    const section_start = padded_left + (section_length * label_index);
+    const section_padding = 20;
+    const bar_padding = 5;
+    const bar_width = (section_length - (section_padding * 2) - (bar_padding * (labels.length - 1))) / active_datasets.length;
+
+    console.log(section_length, bar_width);
+
+    active_datasets.forEach(dataset => {
+
+      const dataset_index = active_datasets.indexOf(dataset);
+      const value = dataset.values[label_index];
       const y_pos = (padded_top + y_length) - (value * y_length) / max_value;
-      const x_pos = padded_left + (x_label_gap * value_index);
+      const x_pos = section_start + section_padding + (bar_width * dataset_index) + (bar_padding * dataset_index);
+      const bar_height = padded_bottom - y_pos
 
-      if (value_index == 0) ctx.moveTo(x_pos, y_pos);
-      else ctx.lineTo(x_pos, y_pos);
+      ctx.fillStyle = color_service.hex_to_rgba(dataset.color, 0.7);
+      ctx.fillRect(x_pos, y_pos, bar_width, bar_height);
 
-      if (value_index == labels.length - 1) {
+      ctx.strokeStyle = dataset.color;
+      ctx.strokeRect(x_pos, y_pos, bar_width, bar_height);
 
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = color_service.hex_to_rgba(dataset.color, 0.7);
-        ctx.stroke();
+    });
 
-      };
-
-    };
-
-  });
+  };
 
   // Create the borders
   ctx.beginPath();
@@ -168,6 +169,5 @@ line_graph_service.draw_canvas = function(graph_values, datasets) {
     starting_x += label_width + padding;
 
   });
-
 
 };

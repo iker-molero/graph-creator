@@ -131,6 +131,103 @@
 
       </div>
 
+      <!-- Inputs for bar graphs -->
+      <div class="bar_graph_inputs" ng-show="selected_graph_type == 1">
+
+        <!-- Graph values -->
+        <div class="input_wrapper" ng-show="selected_input_type == 0">
+
+          <div class="color_input">
+
+            <p>Background Color:</p>
+            <button class="toggle"
+              ng-click="bar_graph_values.show_background = !bar_graph_values.show_background; reload_bar_graph()">
+              <div ng-show="bar_graph_values.show_background"></div>
+            </button>
+            <input type="color" ng-model="bar_graph_values.background_color" ng-change="reload_bar_graph()">
+
+          </div>
+
+          <div class="color_input">
+
+            <p>Border Color:</p>
+            <input type="color" ng-model="bar_graph_values.border_color" ng-change="reload_bar_graph()">
+
+          </div>
+
+          <div class="color_input">
+
+            <p>Grid Color:</p>
+            <input type="color" ng-model="bar_graph_values.grid_color" ng-change="reload_bar_graph()">
+
+          </div>
+
+          <div class="labels_input">
+
+            <p>Labels:</p>
+            <div class="labels_wrapper">
+
+              <input type="text" ng-repeat="label in bar_graph_values.labels track by $index"
+                ng-model="bar_graph_values.labels[$index]" ng-change="reload_bar_graph()">
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Datasets values -->
+        <div class="datasets_container">
+
+          <div class="dataset_wrapper" ng-show="selected_input_type == 1" ng-repeat="dataset in bar_graph_datasets">
+
+            <div class="labels_input">
+
+              <p>Name:</p>
+
+              <div class="labels_wrapper">
+
+                <input type="text" ng-model="dataset.name" ng-change="reload_bar_graph()">
+
+              </div>
+
+            </div>
+
+            <div class="toggle_input">
+
+              <p>Active:</p>
+
+              <button class="toggle" ng-click="dataset.active = !dataset.active; reload_bar_graph()">
+                <div ng-show="dataset.active"></div>
+              </button>
+
+            </div>
+
+            <div class="color_input">
+
+              <p>Color:</p>
+              <input type="color" ng-model="dataset.color" ng-change="reload_bar_graph()">
+
+            </div>
+
+            <div class="labels_input">
+
+              <p>Values:</p>
+              <div class="labels_wrapper">
+
+                <input type="text" ng-repeat="value in dataset.values track by $index" ng-model="dataset.values[$index]"
+                  ng-change="reload_bar_graph()">
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
 
     <!-- Graph Section -->
@@ -177,7 +274,8 @@
 <script src="js/controllers/graph_creator_controller.js"></script>
 
 <!-- JS Services -->
-<script src="js/services/line_graph_service.js"></script>
 <script src="js/services/color_service.js"></script>
+<script src="js/services/line_graph_service.js"></script>
+<script src="js/services/bar_graph_service.js"></script>
 
 </html>
