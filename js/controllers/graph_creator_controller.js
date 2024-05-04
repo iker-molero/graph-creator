@@ -219,6 +219,38 @@ graph_creator_controller = function($scope) {
 
   };
 
+  $scope.download_graph = function() {
+
+    let id_to_download = "";
+
+    switch ($scope.selected_graph_type) {
+
+      case 0:
+        id_to_download = "line_graph";
+        break;
+
+      case 1:
+        id_to_download = "bar_graph";
+        break;
+
+      case 2:
+        id_to_download = "pie_graph";
+        break;
+    
+      default:
+        id_to_download = "line_graph";
+        break;
+    }
+
+    let canvas = document.getElementById(id_to_download);
+    var data_url = canvas.toDataURL("image/png");
+    var a = document.createElement('a');
+    a.href = data_url;
+    a.download = `${id_to_download}.png`;
+    a.click();
+
+  };
+
   // ====================================
   //                 On-load
   // ====================================
