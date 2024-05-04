@@ -111,8 +111,6 @@ bar_graph_service.draw_canvas = function(graph_values, datasets) {
     const bar_padding = 5;
     const bar_width = (section_length - (section_padding * 2) - (bar_padding * (labels.length - 1))) / active_datasets.length;
 
-    console.log(section_length, bar_width);
-
     active_datasets.forEach(dataset => {
 
       const dataset_index = active_datasets.indexOf(dataset);

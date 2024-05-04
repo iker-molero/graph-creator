@@ -54,6 +54,13 @@ p {
 
 }
 
+.pie_graph_inputs {
+
+  max-height: calc(100% - 50px);
+  display: flex;
+
+}
+
 .content_wrapper {
 
   width: calc(100vw - 40px);

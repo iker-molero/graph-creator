@@ -228,6 +228,96 @@
 
       </div>
 
+      <!-- Inputs for pie graphs -->
+      <div class="pie_graph_inputs" ng-show="selected_graph_type == 2">
+
+        <!-- Graph values -->
+        <div class="input_wrapper" ng-show="selected_input_type == 0">
+
+          <div class="color_input">
+
+            <p>Background Color:</p>
+            <button class="toggle"
+              ng-click="pie_graph_values.show_background = !pie_graph_values.show_background; reload_pie_graph()">
+              <div ng-show="pie_graph_values.show_background"></div>
+            </button>
+            <input type="color" ng-model="pie_graph_values.background_color" ng-change="reload_pie_graph()">
+
+          </div>
+
+          <div class="color_input">
+
+            <p>Labels Color:</p>
+            <input type="color" ng-model="pie_graph_values.lables_color" ng-change="reload_pie_graph()">
+
+          </div>
+
+          <div class="labels_input">
+
+            <p>Labels:</p>
+            <div class="labels_wrapper">
+
+              <input type="text" ng-repeat="label in pie_graph_values.labels track by $index"
+                ng-model="pie_graph_values.labels[$index]" ng-change="reload_pie_graph()">
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Datasets values -->
+        <div class="datasets_container">
+
+          <div class="dataset_wrapper" ng-show="selected_input_type == 1" ng-repeat="dataset in pie_graph_datasets">
+
+            <div class="labels_input">
+
+              <p>Name:</p>
+
+              <div class="labels_wrapper">
+
+                <input type="text" ng-model="dataset.name" ng-change="reload_pie_graph()">
+
+              </div>
+
+            </div>
+
+            <div class="toggle_input">
+
+              <p>Active:</p>
+
+              <button class="toggle" ng-click="dataset.active = !dataset.active; reload_pie_graph()">
+                <div ng-show="dataset.active"></div>
+              </button>
+
+            </div>
+
+            <div class="color_input">
+
+              <p>Color:</p>
+              <input type="color" ng-model="dataset.color" ng-change="reload_pie_graph()">
+
+            </div>
+
+            <div class="labels_input">
+
+              <p>Value:</p>
+              <div class="labels_wrapper">
+                
+                <input type="text" ng-model="dataset.value"
+                  ng-change="reload_pie_graph()">
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
 
     <!-- Graph Section -->
@@ -277,5 +367,6 @@
 <script src="js/services/color_service.js"></script>
 <script src="js/services/line_graph_service.js"></script>
 <script src="js/services/bar_graph_service.js"></script>
+<script src="js/services/pie_graph_service.js"></script>
 
 </html>

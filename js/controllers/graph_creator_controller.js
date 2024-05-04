@@ -121,6 +121,64 @@ graph_creator_controller = function($scope) {
 
   ];
 
+  // Pie graph values:
+  // Background color - (Hex value)
+  // Labels color - (Hex value)
+  // Labels - [Strings]
+  $scope.pie_graph_values = {
+
+    show_background: true,
+    background_color: "#0C0C0C",
+    label_color: "#FFFFFF",
+    labels: ["2017", "2018", "2019", "2020", "2021"]
+
+  };
+
+  // Bar datasets values:
+  // Dataset item:
+  // - Active - (Bool)
+  // - Name - (String)
+  // - Color - (Hex value)
+  // - Value - Int
+  $scope.pie_graph_datasets = [
+
+    {
+      active: true,
+      name: "Javascript",
+      color: "#F7DF1E",
+      value: 1100421
+    },
+
+    {
+      active: true,
+      name: "Python",
+      color: "#3776AB",
+      value: 548870
+    },
+
+    {
+      active: true,
+      name: "C",
+      color: "#A8B9CC",
+      value: 292000
+    },
+
+    {
+      active: true,
+      name: "Kotlin",
+      color: "#7F52FF",
+      value: 7416
+    },
+
+    {
+      active: true,
+      name: "Rust",
+      color: "#FF642D",
+      value: 15424
+    },
+
+  ];
+
   // ===================================
   //               Functions
   // ===================================
@@ -155,6 +213,12 @@ graph_creator_controller = function($scope) {
 
   };
 
+  $scope.reload_pie_graph = function() {
+
+    pie_graph_service.draw_canvas($scope.pie_graph_values, $scope.pie_graph_datasets);
+
+  };
+
   // ====================================
   //                 On-load
   // ====================================
@@ -164,6 +228,9 @@ graph_creator_controller = function($scope) {
 
   bar_graph_service.create_canvas('bar_graph');
   bar_graph_service.draw_canvas($scope.bar_graph_values, $scope.bar_graph_datasets);
+
+  pie_graph_service.create_canvas('pie_graph');
+  pie_graph_service.draw_canvas($scope.pie_graph_values, $scope.pie_graph_datasets);
 
 };
 
