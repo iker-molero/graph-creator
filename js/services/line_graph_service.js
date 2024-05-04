@@ -111,7 +111,7 @@ line_graph_service.draw_canvas = function(graph_values, datasets) {
     for (value_index in dataset.values) {
 
       if (value_index > labels.length - 1) continue;
-      const value = dataset.values[value_index];
+      const value = dataset.values[value_index] < 0 ? 0 : dataset.values[value_index];
       const y_pos = (padded_top + y_length) - (value * y_length) / max_value;
       const x_pos = padded_left + (x_label_gap * value_index);
 

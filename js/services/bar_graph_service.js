@@ -116,7 +116,7 @@ bar_graph_service.draw_canvas = function(graph_values, datasets) {
     active_datasets.forEach(dataset => {
 
       const dataset_index = active_datasets.indexOf(dataset);
-      const value = dataset.values[label_index];
+      const value = dataset.values[label_index] < 0 ? 0 : dataset.values[label_index];
       const y_pos = (padded_top + y_length) - (value * y_length) / max_value;
       const x_pos = section_start + section_padding + (bar_width * dataset_index) + (bar_padding * dataset_index);
       const bar_height = padded_bottom - y_pos
