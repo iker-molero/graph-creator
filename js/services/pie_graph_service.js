@@ -9,9 +9,6 @@ pie_graph_service.create_canvas = function(id) {
 
 pie_graph_service.draw_canvas = function(graph_values, datasets) {
 
-    // Filter all the empty labels
-    const labels = graph_values.labels.filter((label) => label != "");
-
     // Get all the canvas variables
     const canvas = this.canvas;
     const ctx = this.ctx;
@@ -81,7 +78,7 @@ pie_graph_service.draw_canvas = function(graph_values, datasets) {
 
         // Draw the label
         ctx.font = "14px Arial";
-        ctx.fillStyle = "#FFFFFF";
+        ctx.fillStyle = graph_values.labels_color;
         ctx.fillText(label, starting_x + gap, starting_y + 5);    
 
         starting_y += padding;

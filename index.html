@@ -248,19 +248,7 @@
           <div class="color_input">
 
             <p>Labels Color:</p>
-            <input type="color" ng-model="pie_graph_values.lables_color" ng-change="reload_pie_graph()">
-
-          </div>
-
-          <div class="labels_input">
-
-            <p>Labels:</p>
-            <div class="labels_wrapper">
-
-              <input type="text" ng-repeat="label in pie_graph_values.labels track by $index"
-                ng-model="pie_graph_values.labels[$index]" ng-change="reload_pie_graph()">
-
-            </div>
+            <input type="color" ng-model="pie_graph_values.labels_color" ng-change="reload_pie_graph()">
 
           </div>
 

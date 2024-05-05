@@ -124,13 +124,11 @@ graph_creator_controller = function($scope) {
   // Pie graph values:
   // Background color - (Hex value)
   // Labels color - (Hex value)
-  // Labels - [Strings]
   $scope.pie_graph_values = {
 
     show_background: true,
     background_color: "#0C0C0C",
-    label_color: "#FFFFFF",
-    labels: ["2017", "2018", "2019", "2020", "2021"]
+    labels_color: "#FFFFFF",
 
   };
 
